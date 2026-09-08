@@ -17,14 +17,6 @@ public struct Polygon<Point> {
         self.vertices = vertices
     }
 
-    /// The required first three arguments establish the vertex-count invariant.
-    public init(_ first: Point, _ second: Point, _ third: Point, _ remaining: Point...) {
-        self.vertices = [first, second, third] + remaining
-    }
-
-    // Only operations preserving at least three vertices may use this initializer.
-    private init(validated vertices: [Point]) { self.vertices = vertices }
-
     public var vertexCount: Int { vertices.count }
 
     /// The edge beginning at the given vertex index, including the closing edge.
@@ -55,3 +47,13 @@ public struct Polygon<Point> {
 extension Polygon: Equatable where Point: Equatable {}
 extension Polygon: Hashable where Point: Hashable {}
 extension Polygon: Sendable where Point: Sendable {}
+
+extension Polygon {
+    /// The required first three arguments establish the vertex-count invariant.
+    public init(_ first: Point, _ second: Point, _ third: Point, _ remaining: Point...) {
+        self.vertices = [first, second, third] + remaining
+    }
+
+    // Only operations preserving at least three vertices may use this initializer.
+    private init(validated vertices: [Point]) { self.vertices = vertices }
+}

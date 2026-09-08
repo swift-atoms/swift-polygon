@@ -35,3 +35,23 @@ Conditional coding uses an array and routes decoding through the same count
 validation. Encoding and decoding conformances are independent. Production
 depends only on Segment; Point and Tagged are explicit test dependencies.
 Resolve URL dependencies locally with `atoms.xcworkspace`.
+
+## Fixed vertex counts
+
+`Ngon<N, Point>` retains the vertex count in its public type while reusing Polygon
+as its immutable backing representation. Construction rejects N below three and
+arrays/polygons whose count differs from N. The representation uses Polygon's
+array storage; a static count does not imply inline allocation or regularity.
+
+```swift
+import Polygon
+let triangle = try Ngon<3, String>(vertices: ["a", "b", "c"])
+let reversed: Ngon<3, String> = triangle.reversed
+let boundary: Polygon<String> = triangle.polygon
+```
+
+Mapping and reversal preserve N. Decoding checks both Polygon validity and the
+exact declared count, rejecting extra vertices as well as missing vertices.
+Named quadrilateral/pentagon/hexagon domains need no additional packages: use
+Ngon<4, Point>, Ngon<5, Point>, and Ngon<6, Point> respectively. Frame and dimension
+identity remain in Point. Compiler-negative count/frame checks remain pending.
