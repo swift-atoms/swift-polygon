@@ -13,7 +13,7 @@ struct `Polygon point call sites` {
             Point(x: 0, y: 0, z: 0), Point(x: 1, y: 0, z: 0),
             Point(x: 0, y: 1, z: 0), Point(x: 0, y: 0, z: 1)
         )
-        #expect(spatial.vertexCount == 4) // No unearned planarity guarantee.
+        #expect(spatial.vertexCount == 4)
     }
 
     private enum World {}

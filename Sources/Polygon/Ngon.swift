@@ -1,5 +1,3 @@
-/// A polygon boundary with a statically named, validated vertex count.
-/// This does not imply regularity, convexity, planarity or distinct vertices.
 public struct Ngon<let N: Int, Point> {
     public let polygon: Polygon<Point>
 
