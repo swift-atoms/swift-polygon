@@ -1,7 +1,7 @@
 public struct Ngon<let N: Int, Point> {
     public let polygon: Polygon<Point>
 
-    public enum Error: Swift.Error, Equatable, Sendable {
+    public enum Error: Swift::Error, Equatable, Sendable {
         case invalidVertexCount
     }
 
@@ -11,13 +11,14 @@ public struct Ngon<let N: Int, Point> {
             self.polygon = try Polygon(vertices: vertices)
         } catch { throw .invalidVertexCount }
     }
+}
 
+extension Ngon {
     public var vertices: [Point] { polygon.vertices }
     public var vertexCount: Int { N }
-
     public var reversed: Self { Self(validated: polygon.reversed) }
 
-    public func map<Result, Failure: Swift.Error>(
+    public func map<Result, Failure: Swift::Error>(
         _ transform: (Point) throws(Failure) -> Result
     ) throws(Failure) -> Ngon<N, Result> {
         Ngon<N, Result>(validated: try polygon.map(transform))

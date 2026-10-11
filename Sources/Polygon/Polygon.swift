@@ -3,7 +3,7 @@
 public struct Polygon<Point> {
     public let vertices: [Point]
 
-    public enum Error: Swift.Error, Equatable, Sendable {
+    public enum Error: Swift::Error, Equatable, Sendable {
         case insufficientVertices
     }
 
@@ -11,7 +11,9 @@ public struct Polygon<Point> {
         guard vertices.count >= 3 else { throw .insufficientVertices }
         self.vertices = vertices
     }
+}
 
+extension Polygon {
     public var vertexCount: Int { vertices.count }
 
     public func edge(at index: Int) -> Segment<Point> {
@@ -26,7 +28,7 @@ public struct Polygon<Point> {
         Self(validated: [vertices[0]] + vertices.dropFirst().reversed())
     }
 
-    public func map<Result, Failure: Swift.Error>(
+    public func map<Result, Failure: Swift::Error>(
         _ transform: (Point) throws(Failure) -> Result
     ) throws(Failure) -> Polygon<Result> {
         var result: [Result] = []
