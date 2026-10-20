@@ -18,10 +18,12 @@ struct `Polygon contracts` {
     func `Natural construction preserves vertices and implicit closure`() {
         let polygon = Polygon("a", "b", "c", "d")
         #expect(polygon.vertexCount == 4)
-        #expect(polygon.edges == [
-            Segment(from: "a", to: "b"), Segment(from: "b", to: "c"),
-            Segment(from: "c", to: "d"), Segment(from: "d", to: "a"),
-        ])
+        #expect(
+            polygon.edges == [
+                Segment(from: "a", to: "b"), Segment(from: "b", to: "c"),
+                Segment(from: "c", to: "d"), Segment(from: "d", to: "a"),
+            ]
+        )
         #expect(polygon.edge(at: 3) == Segment(from: "d", to: "a"))
     }
 

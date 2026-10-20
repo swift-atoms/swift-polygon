@@ -30,23 +30,24 @@ extension Ngon: Hashable where Point: Hashable {}
 extension Ngon: Sendable where Point: Sendable {}
 
 #if !hasFeature(Embedded)
-extension Ngon: Encodable where Point: Encodable {
-    public func encode(to encoder: any Encoder) throws {
-        try polygon.encode(to: encoder)
-    }
-}
-extension Ngon: Decodable where Point: Decodable {
-    public init(from decoder: any Decoder) throws {
-        let polygon = try Polygon<Point>(from: decoder)
-        do { try self.init(polygon) }
-        catch {
-            throw DecodingError.dataCorrupted(.init(
-                codingPath: decoder.codingPath,
-                debugDescription: "Expected exactly \(N) vertices and at least three"
-            ))
+    extension Ngon: Encodable where Point: Encodable {
+        public func encode(to encoder: any Encoder) throws {
+            try polygon.encode(to: encoder)
         }
     }
-}
+    extension Ngon: Decodable where Point: Decodable {
+        public init(from decoder: any Decoder) throws {
+            let polygon = try Polygon<Point>(from: decoder)
+            do { try self.init(polygon) } catch {
+                throw DecodingError.dataCorrupted(
+                    .init(
+                        codingPath: decoder.codingPath,
+                        debugDescription: "Expected exactly \(N) vertices and at least three"
+                    )
+                )
+            }
+        }
+    }
 #endif
 
 extension Ngon {

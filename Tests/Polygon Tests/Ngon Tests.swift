@@ -1,6 +1,6 @@
+import Foundation
 import Polygon
 import Testing
-import Foundation
 
 @Suite struct `Fixed count polygon contracts` {
     @Test func `Declared count is preserved by mapping and reversal`() throws {
