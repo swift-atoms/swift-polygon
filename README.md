@@ -6,7 +6,7 @@ Use this package when you need a closed polygon as an ordered cycle of at least 
 
 - Closure is implicit: the edge at index `i` runs from vertex `i` to vertex `i + 1`, and the last edge runs from the last vertex back to the first. Repeating the first vertex at the end adds a vertex and a zero-length closing edge.
 - The only validity rule is three or more vertices. Repeated or collinear vertices, zero-length edges, self-intersection and orientation are neither checked nor normalised.
-- Equality and hashing compare the vertex sequence exactly. A cyclic shift or a reversal of the same polygon is a different value.
+- Equality and hashing compare the vertex sequence exactly. A cyclic shift or a reversal of the same polygon is a different value unless it leaves the vertex sequence unchanged, as when every vertex is equal.
 - `reversed` keeps the first vertex and reverses the order of the rest. Its edges are the original edges in reverse order, each reversed, and reversing twice returns the original.
 - `map` keeps the vertex count and order. It calls the transform on vertices in traversal order and stops at the first failure. It does not merge vertices that map to the same value.
 - `edge(at:)` traps unless the index is a valid vertex index.
