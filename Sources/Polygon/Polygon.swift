@@ -3,6 +3,10 @@
 public struct Polygon<Point> {
     public let vertices: [Point]
 
+    public enum Error: Swift::Error, Equatable, Sendable {
+        case insufficientVertices
+    }
+
     public init(vertices: [Point]) throws(Error) {
         guard vertices.count >= 3 else { throw .insufficientVertices }
         self.vertices = vertices
@@ -46,34 +50,3 @@ extension Polygon {
 
     private init(validated vertices: [Point]) { self.vertices = vertices }
 }
-
-extension Polygon {
-
-    public enum Error: Swift::Error, Equatable, Sendable {
-        case insufficientVertices
-    }
-}
-
-#if !hasFeature(Embedded)
-    extension Polygon: Encodable where Point: Encodable {
-        public func encode(to encoder: any Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encode(vertices)
-        }
-    }
-
-    extension Polygon: Decodable where Point: Decodable {
-        public init(from decoder: any Decoder) throws {
-            let container = try decoder.singleValueContainer()
-            let vertices = try container.decode([Point].self)
-            do {
-                try self.init(vertices: vertices)
-            } catch {
-                throw DecodingError.dataCorruptedError(
-                    in: container,
-                    debugDescription: "A polygon requires at least three vertices"
-                )
-            }
-        }
-    }
-#endif
