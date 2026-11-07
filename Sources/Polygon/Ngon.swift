@@ -1,6 +1,10 @@
 public struct Ngon<let N: Int, Point> {
     public let polygon: Polygon<Point>
 
+    public enum Error: Swift::Error, Equatable, Sendable {
+        case invalidVertexCount
+    }
+
     public init(vertices: [Point]) throws(Error) {
         guard N >= 3, vertices.count == N else { throw .invalidVertexCount }
         do {
@@ -54,8 +58,3 @@ extension Ngon {
 
     private init(validated polygon: Polygon<Point>) { self.polygon = polygon }
 }
-
-extension Ngon {
-    public enum Error: Swift::Error, Equatable, Sendable {
-        case invalidVertexCount
-    }}
