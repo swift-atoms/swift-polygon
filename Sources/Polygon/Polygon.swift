@@ -3,10 +3,6 @@
 public struct Polygon<Point> {
     public let vertices: [Point]
 
-    public enum Error: Swift::Error, Equatable, Sendable {
-        case insufficientVertices
-    }
-
     public init(vertices: [Point]) throws(Error) {
         guard vertices.count >= 3 else { throw .insufficientVertices }
         self.vertices = vertices
@@ -49,4 +45,11 @@ extension Polygon {
     }
 
     private init(validated vertices: [Point]) { self.vertices = vertices }
+}
+
+extension Polygon {
+
+    public enum Error: Swift::Error, Equatable, Sendable {
+        case insufficientVertices
+    }
 }
