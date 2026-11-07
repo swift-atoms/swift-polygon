@@ -81,7 +81,7 @@ struct `Polygon contracts` {
 
     @Test
     func `Mapping stops in traversal order and propagates the typed failure`() {
-        enum Failure: Error { case rejected }
+        enum Failure: Swift.Error { case rejected }
         var visited: [Int] = []
         do {
             _ = try Polygon(1, 2, 3).map { (vertex: Int) throws(Failure) -> Int in

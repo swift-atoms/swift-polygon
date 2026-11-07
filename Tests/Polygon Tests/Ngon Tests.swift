@@ -34,7 +34,7 @@ import Testing
     }
 
     @Test func `Mapping preserves the supplied typed failure`() throws {
-        enum Failure: Error { case rejected }
+        enum Failure: Swift.Error { case rejected }
         let triangle = try Ngon<3, Int>(vertices: [1, 2, 3])
         func transform(_ value: Int) throws(Failure) -> String { throw .rejected }
         #expect(throws: Failure.rejected) { try triangle.map(transform) }

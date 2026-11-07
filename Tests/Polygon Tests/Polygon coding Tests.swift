@@ -14,7 +14,7 @@ struct `Polygon coding` {
 
     @Test(arguments: ["[]", "[1]", "[1,2]", "null", "[1,2,null]"])
     func `Decoding cannot bypass minimum cardinality or point decoding`(_ json: String) {
-        #expect(throws: (any Error).self) {
+        #expect(throws: (any Swift.Error).self) {
             try JSONDecoder().decode(Polygon<Int>.self, from: Data(json.utf8))
         }
     }
