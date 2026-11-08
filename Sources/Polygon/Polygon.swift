@@ -1,4 +1,4 @@
-@_exported public import Segment
+public import Segment
 
 public struct Polygon<Point> {
     public let vertices: [Point]
