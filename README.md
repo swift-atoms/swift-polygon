@@ -1,6 +1,6 @@
 # swift-polygon
 
-Use this package when you need a closed polygon as an ordered cycle of at least three vertices of any point type, with no arithmetic, equality or ordering required of the points. Start from `Polygon<Point>`. Use `Ngon<N, Point>` when the vertex count is part of the type, such as a triangle or quadrilateral. For a single edge, use `Segment<Point>` from swift-segment.
+Use this package when you need a closed polygon as an ordered cycle of at least three vertices of any point type, with no arithmetic, equality or ordering required of the points. Start from `Polygon<Point>`. Use `Ngon<N, Point>` when the vertex count is part of the type, such as a triangle or quadrilateral. For a single edge, use `Segment<Point>` from swift-segment. A triangle of `Point<3, Scalar>` from swift-point says where a `Ray` from swift-ray crosses it.
 
 ## Laws
 
@@ -12,3 +12,5 @@ Use this package when you need a closed polygon as an ordered cycle of at least 
 - `edge(at:)` traps unless the index is a valid vertex index.
 - Encoding produces a bare array of the vertices in order, repetitions included. Decoding fails on fewer than three vertices or a vertex that fails to decode. Encoding and decoding need only `Encodable` or `Decodable` points respectively.
 - `Ngon<N, Point>` requires `N >= 3` and exactly `N` vertices. An `Ngon` with `N` below three can never be constructed. It keeps the `Polygon<Point>` it was built from unchanged. `map` and `reversed` keep `N`. It encodes the same way as `Polygon<Point>`, and decoding fails unless exactly `N` vertices are present.
+- `Ngon<3, Point>(_:_:_:)` is the triangle of those three vertices in order; it cannot fail.
+- `intersection(with:)` of a triangle of `Point<3, Scalar>` and a `Ray` with a `Vector<3, Scalar>` direction is Möller and Trumbore's: the ray's parameter t, the crossing at origin + t × direction, and the barycentric weights of the vertices in order, none negative and adding up to one. Either side is crossed. A ray in the triangle's plane or parallel to it (an exact zero determinant, no tolerance), one passing outside, and one that would need t below zero cross nothing; t of zero, a ray starting on the triangle, crosses.

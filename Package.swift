@@ -9,15 +9,27 @@ let package = Package(
         .package(url: "https://github.com/swift-atoms/swift-segment.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-point.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-tagged.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-ray.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-vector.git", branch: "main"),
     ],
     targets: [
-        .target(name: "Polygon", dependencies: [.product(name: "Segment", package: "swift-segment")]),
+        .target(
+            name: "Polygon",
+            dependencies: [
+                .product(name: "Segment", package: "swift-segment"),
+                .product(name: "Point", package: "swift-point"),
+                .product(name: "Ray", package: "swift-ray"),
+                .product(name: "Vector", package: "swift-vector"),
+            ]
+        ),
         .testTarget(
             name: "Polygon Tests",
             dependencies: [
                 .target(name: "Polygon"),
                 .product(name: "Point", package: "swift-point"),
                 .product(name: "Tagged", package: "swift-tagged"),
+                .product(name: "Ray", package: "swift-ray"),
+                .product(name: "Vector", package: "swift-vector"),
             ]
         ),
     ],

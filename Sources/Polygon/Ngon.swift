@@ -56,5 +56,5 @@ extension Ngon {
         self.polygon = polygon
     }
 
-    private init(validated polygon: Polygon<Point>) { self.polygon = polygon }
+    init(validated polygon: Polygon<Point>) { self.polygon = polygon }
 }
